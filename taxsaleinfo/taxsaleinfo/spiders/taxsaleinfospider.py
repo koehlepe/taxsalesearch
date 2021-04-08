@@ -5,15 +5,22 @@ import w3lib.html
 class TaxSaleInfoSpider(scrapy.Spider):
     name = "taxsaleinfo"
     def start_requests(self):
-        url = 'https://www.tax-sale.info/lot/show/id/120216'
+        url = 'https://www.tax-sale.info/listings/auction/631'
         yield scrapy.Request(url,cookies=[{'name': 'PHPSESSID',
                                         'value': '<redacted>',
                                         'domain': 'www.tax-sale.info',
                                         'path': '/'}], callback=self.parse)
 
     def parse(self, response):
+        for propertyListing in response.css("article.portfolio-item"):
+            link = propertyListing.css(".portfolio-image > a::attr(href)").extract_first()
+            yield scrapy.Request('https://www.tax-sale.info'+link,cookies=[{'name': 'PHPSESSID',
+                                        'value': '<redacted>',
+                                        'domain': 'www.tax-sale.info',
+                                        'path': '/'}], callback=self.parse_property)
 
-        comments = ' '.join([w3lib.html.remove_tags(item).strip() for item in response.xpath('/html/body/div[1]/section/div/div[1]/div[5]/div[2]/div/div/div[1]/div[2]/div').extract()])
+    def parse_property(self, response):
+        comments = ' '.join([w3lib.html.remove_tags(item).strip() for item in response.xpath('/html/body/div[1]/section/div/div[1]/div[5]/div[2]/div/div/div[1]/div[2]/div').extract()]).replace('\n',' ')
         yield {
                 'title': response.css('h4.center::text').get(),
                 'comments': comments
