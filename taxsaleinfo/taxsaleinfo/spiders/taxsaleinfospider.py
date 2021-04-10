@@ -7,7 +7,7 @@ class TaxSaleInfoSpider(scrapy.Spider):
     def start_requests(self):
         url = 'https://www.tax-sale.info/listings/auction/631'
         yield scrapy.Request(url,cookies=[{'name': 'PHPSESSID',
-                                        'value': '<redacted>',
+                                        'value': 'ob2m4hqkhif4cp2msv5ajcgof4',
                                         'domain': 'www.tax-sale.info',
                                         'path': '/'}], callback=self.parse)
 
@@ -15,7 +15,7 @@ class TaxSaleInfoSpider(scrapy.Spider):
         for propertyListing in response.css("article.portfolio-item"):
             link = propertyListing.css(".portfolio-image > a::attr(href)").extract_first()
             yield scrapy.Request('https://www.tax-sale.info'+link,cookies=[{'name': 'PHPSESSID',
-                                        'value': '<redacted>',
+                                        'value': 'ob2m4hqkhif4cp2msv5ajcgof4',
                                         'domain': 'www.tax-sale.info',
                                         'path': '/'}], callback=self.parse_property)
 
