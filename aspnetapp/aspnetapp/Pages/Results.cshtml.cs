@@ -9,18 +9,22 @@ using aspnetapp.Models;
 
 namespace aspnetapp.Pages
 {
-    public class IndexModel : PageModel
+    public class ResultsModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public ResultsModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            Results = new List<Result>(){new Result{Title="Lake House",Comment="This is an example listing. I would expect the search to show some part of the comment", Link="http://www.lakehouse.com"}};
         }
 
 
         [BindProperty]
         public Search Search { get; set; }
+
+        [BindProperty]
+        public List<Result> Results {get;set;}
 
         public void OnGet()
         {
