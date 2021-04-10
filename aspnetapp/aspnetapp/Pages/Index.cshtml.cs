@@ -20,7 +20,7 @@ namespace aspnetapp.Pages
 
 
         [BindProperty]
-        public Search Search { get; set; }
+        public String Search { get; set; }
 
         public void OnGet()
         {
@@ -34,7 +34,7 @@ namespace aspnetapp.Pages
                 return Page();
             }
 
-            return RedirectToPage("./Results",new { q = Search.Input});
+            return RedirectToPage("./Results",new { search = Search});
         }
     }
 }

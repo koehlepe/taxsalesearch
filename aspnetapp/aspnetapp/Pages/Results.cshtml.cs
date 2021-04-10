@@ -20,8 +20,8 @@ namespace aspnetapp.Pages
         }
 
 
-        [BindProperty]
-        public Search Search { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public String Search { get; set; }
 
         [BindProperty]
         public List<Result> Results {get;set;}
@@ -38,7 +38,7 @@ namespace aspnetapp.Pages
                 return Page();
             }
 
-            return RedirectToPage("./Results",new { q = Search.Input});
+            return RedirectToPage("./Results",new { search = Search});
         }
     }
 }
