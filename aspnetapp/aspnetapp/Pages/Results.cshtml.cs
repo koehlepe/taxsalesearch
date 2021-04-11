@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using aspnetapp.Models;
+using CommonServiceLocator;
+using SolrNet;
+using SolrNet.Commands.Parameters;
+
 
 namespace aspnetapp.Pages
 {
@@ -28,7 +32,20 @@ namespace aspnetapp.Pages
 
         public void OnGet()
         {
+            var solr = ServiceLocator.Current.GetInstance<ISolrOperations<Property>>();                     
+            var results = solr.Query(new SolrQueryByField("title", Search) + new SolrQueryByField("comments", Search), new QueryOptions
+            {
+                StartOrCursor = new StartOrCursor.Start(0),
+                Rows = 10
+            });
 
+            Results = new List<Result>();
+            foreach (var result in results)
+            {
+                var commentLength = result.Comments[0].Length;
+                var comment = result.Comments[0].Substring(0, Math.Min(commentLength, 80));
+                Results.Add(new Result{Title=result.Title[0], Comment =comment, Link = result.Link[0]});
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()

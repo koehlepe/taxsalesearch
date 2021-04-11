@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SolrNet;
+using aspnetapp.Models;
 
 namespace aspnetapp
 {
@@ -39,6 +41,8 @@ namespace aspnetapp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+            SolrNet.Startup.Init<Property>("http://solr:8983/solr/gettingstarted");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
