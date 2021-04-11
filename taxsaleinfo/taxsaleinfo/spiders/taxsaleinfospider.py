@@ -7,7 +7,7 @@ class TaxSaleInfoSpider(scrapy.Spider):
     def start_requests(self):
         url = 'https://www.tax-sale.info/listings/auction/631'
         yield scrapy.Request(url,cookies=[{'name': 'PHPSESSID',
-                                        'value': '5d1jnb196qj7jskmbcsbhstnah',
+                                        'value': '5pfcoh0dg400qvuj4pvcakim3e',
                                         'domain': 'www.tax-sale.info',
                                         'path': '/'}], callback=self.parse)
 
@@ -15,12 +15,14 @@ class TaxSaleInfoSpider(scrapy.Spider):
         for propertyListing in response.css("article.portfolio-item"):
             link = propertyListing.css(".portfolio-image > a::attr(href)").extract_first()
             yield scrapy.Request('https://www.tax-sale.info'+link,cookies=[{'name': 'PHPSESSID',
-                                        'value': '5d1jnb196qj7jskmbcsbhstnah',
+                                        'value': '5pfcoh0dg400qvuj4pvcakim3e',
                                         'domain': 'www.tax-sale.info',
                                         'path': '/'}], callback=self.parse_property)
 
     def parse_property(self, response):
-        comments = ' '.join([w3lib.html.remove_tags(item).strip() for item in response.xpath('/html/body/div[1]/section/div/div[1]/div[5]/div[2]/div/div/div[1]/div[2]/div').extract()]).replace('\n',' ')
+        comments = ' '.join([w3lib.html.remove_tags(item) for item in response.xpath('/html/body/div[1]/section/div/div[1]/div[5]/div[2]/div/div/div[1]/div[2]/div').extract()])
+        comments = comments.replace('\n',' ').replace('\r',' ') .split()
+        comments = ' '.join(comments)
         yield {
                 'title': response.css('h4.center::text').get(),
                 'comments': comments,

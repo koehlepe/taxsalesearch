@@ -23,6 +23,15 @@ var process = Process.GetCurrentProcess();
     </form>
 </div>
 <div>
+
+@if (Model.Results == null || Model.Results.Count == 0)
+    {
+        <div class="mt-3 mb-3">
+            <h4>No properties were found.</h4>
+        </div>
+    }
+
+
 @foreach (var item in Model.Results)
 {
     <div class="mt-3 mb-3">
