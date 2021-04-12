@@ -4,18 +4,32 @@ import w3lib.html
 
 class TaxSaleInfoSpider(scrapy.Spider):
     name = "taxsaleinfo"
-    def start_requests(self):
-        url = 'https://www.tax-sale.info/listings/auction/631'
-        yield scrapy.Request(url,cookies=[{'name': 'PHPSESSID',
-                                        'value': '5pfcoh0dg400qvuj4pvcakim3e',
-                                        'domain': 'www.tax-sale.info',
-                                        'path': '/'}], callback=self.parse)
 
-    def parse(self, response):
+    def start_requests(self):
+        url = 'https://www.tax-sale.info/pastAuctions/2020'
+        yield scrapy.Request(url,cookies=[{'name': 'PHPSESSID',
+                                        'value': '2iebg8637rte1lhjlsob6jsqe0',
+                                        'domain': 'www.tax-sale.info',
+                                        'path': '/'}], callback=self.parse_auction_list)
+
+
+    def parse_auction_list(self, response):
+        for auctionListing in response.css(".entry"):
+            link = auctionListing.css(".entry-image > a::attr(href)").extract_first()
+            if link is None:
+                continue
+
+            yield scrapy.Request('https://www.tax-sale.info'+link,cookies=[{'name': 'PHPSESSID',
+                                        'value': '2iebg8637rte1lhjlsob6jsqe0',
+                                        'domain': 'www.tax-sale.info',
+                                        'path': '/'}], callback=self.parse_property_list)
+
+
+    def parse_property_list(self, response):
         for propertyListing in response.css("article.portfolio-item"):
             link = propertyListing.css(".portfolio-image > a::attr(href)").extract_first()
             yield scrapy.Request('https://www.tax-sale.info'+link,cookies=[{'name': 'PHPSESSID',
-                                        'value': '5pfcoh0dg400qvuj4pvcakim3e',
+                                        'value': '2iebg8637rte1lhjlsob6jsqe0',
                                         'domain': 'www.tax-sale.info',
                                         'path': '/'}], callback=self.parse_property)
 
