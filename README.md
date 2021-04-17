@@ -1,25 +1,25 @@
 # Tax Sale Search
 
-I'm starting by gathering data/documents using Scrapy following this tutorial:
-https://docs.scrapy.org/en/latest/intro/tutorial.html
+**Project Overview**
+---
+The aim of this project is to create a toy search engine for CSC 7991 (Information Retrieval) at Wayne State University.
 
-To create an json output file from scrapy, we simply have to run the following command:
-scrapy crawl taxsaleinfo -o properties.json
+First, I needed to gather data. I decided to try out Scrapy to scrape https://www.tax-sale.info for property data. I followed this [tutorial](https://docs.scrapy.org/en/latest/intro/tutorial.html). I wrote the spider you'll see in /taxsaleinfo/taxsaleinfo/spiders/taxsaleinfospider.py, which can be run with the following command.
 
-Adding the docker-compose.yml from the docker-solr repo:
-https://github.com/docker-solr/docker-solr
+``` scrapy crawl taxsaleinfo -o properties.json```
 
-Just run:
-docker-compose up -d
-To start it up.
+Next, I needed to load the data into a search platform. For this I chose to use [Solr](https://solr.apache.org/).
 
-We can import the file from the crawl into solr from the admin user interface.
+To get up and running quickly, I chose to use a docker image for Solr and used the docker-compose.yml from [docker-solr](https://github.com/docker-solr/docker-solr).
 
-Next I wanted to start working on the User Interface, I decided to start by pulling a sample app from here https://github.com/dotnet/dotnet-docker/tree/main/samples/aspnetapp, I updated the app and added a search box on the main page.
- The commands to start up the User Interface are 
+To create an MVP product, I needed a user interface. For this, I started with an ASP.NET Core application from this example [aspnetapp](https://github.com/dotnet/dotnet-docker/tree/main/samples/aspnetapp). I updated the app and added a search box on the main page and a results view.
 
-docker build --pull -t aspnetapp .   
+I had to integrate the user interface with Solr, so I added the necessary package. Then I added a simple call to query Solr on the Title and Comments of a Property.
 
-Followed by:
+Next Steps:
 
-docker run --rm -it -p 8000:80 aspnetapp
+I'm going to create a script to load the data into Solr, so that I don't have to log into the Administration User Interface to do so.
+
+After that, I will add additional settings/tuning for Solr and the queries I make from the User Interface.
+
+Maybe I'll get to look at LTR as well.
