@@ -2,6 +2,19 @@
 
 The aim of this project is to create a toy search engine for CSC 7991 (Information Retrieval) at Wayne State University.
 
+**Usage**
+---
+``` 
+cd SearchTaxSales
+
+docker-compose build
+
+docker-compose up -d
+```
+
+Navigate to http://localhost:8000/.
+
+
 **Project Overview**
 ---
 
