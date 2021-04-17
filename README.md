@@ -1,8 +1,9 @@
 # Tax Sale Search
 
+The aim of this project is to create a toy search engine for CSC 7991 (Information Retrieval) at Wayne State University.
+
 **Project Overview**
 ---
-The aim of this project is to create a toy search engine for CSC 7991 (Information Retrieval) at Wayne State University.
 
 First, I needed to gather data. I decided to try out Scrapy to scrape https://www.tax-sale.info for property data. I followed this [tutorial](https://docs.scrapy.org/en/latest/intro/tutorial.html). I wrote the spider you'll see in /taxsaleinfo/taxsaleinfo/spiders/taxsaleinfospider.py, which can be run with the following command.
 
