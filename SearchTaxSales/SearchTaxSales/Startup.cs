@@ -42,7 +42,7 @@ namespace SearchTaxSales
                 app.UseHsts();
             }
             
-            SolrNet.Startup.Init<Property>("http://solr:8983/solr/gettingstarted");
+            SolrNet.Startup.Init<Property>("http://solr:8983/solr/taxsaleinfo");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

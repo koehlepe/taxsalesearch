@@ -14,6 +14,6 @@ services:
       - data:/var/solr
     command:
       - solr-precreate
-      - gettingstarted
+      - taxsaleinfo
 volumes:
   data:
