@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using aspnetapp.Models;
+using SearchTaxSales.Models;
 
-namespace aspnetapp.Pages
+namespace SearchTaxSales.Pages
 {
     public class IndexModel : PageModel
     {

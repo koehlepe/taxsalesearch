@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using SolrNet.Attributes;
 
-namespace aspnetapp.Models
+namespace SearchTaxSales.Models
 {
     public class Property
     {

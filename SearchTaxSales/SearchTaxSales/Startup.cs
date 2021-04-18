@@ -9,9 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SolrNet;
-using aspnetapp.Models;
+using SearchTaxSales.Models;
 
-namespace aspnetapp
+namespace SearchTaxSales
 {
     public class Startup
     {

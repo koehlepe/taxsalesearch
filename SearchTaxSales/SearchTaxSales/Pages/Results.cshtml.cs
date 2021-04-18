@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using aspnetapp.Models;
+using SearchTaxSales.Models;
 using CommonServiceLocator;
 using SolrNet;
 using SolrNet.Commands.Parameters;
 
 
-namespace aspnetapp.Pages
+namespace SearchTaxSales.Pages
 {
     public class ResultsModel : PageModel
     {
