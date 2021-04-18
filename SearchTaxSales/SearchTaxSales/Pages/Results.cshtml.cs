@@ -20,7 +20,7 @@ namespace SearchTaxSales.Pages
         public ResultsModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-            Results = new List<Result>(){new Result{Title="Lake House",Comment="This is an example listing. I would expect the search to show some part of the comment", Link="http://www.lakehouse.com"}};
+            Results = new List<Result>();
         }
 
 
@@ -42,8 +42,11 @@ namespace SearchTaxSales.Pages
             Results = new List<Result>();
             foreach (var result in results)
             {
-                var commentLength = result.Comments[0].Length;
-                var comment = result.Comments[0].Substring(0, Math.Min(commentLength, 80));
+                var comment = "";
+                if(result.Comments != null && result.Comments.Length>0){
+                    var commentLength = result.Comments[0].Length;
+                    comment = result.Comments[0].Substring(0, Math.Min(commentLength, 80));
+                }
                 Results.Add(new Result{Title=result.Title[0], Comment =comment, Link = result.Link[0]});
             }
         }
