@@ -32,7 +32,7 @@ I had to integrate the user interface with Solr, so I added the necessary packag
 
 Next Steps:
 
-I'm going to create a script to load the data into Solr, so that I don't have to log into the Administration User Interface to do so.
+Realized I need to create some queries and relevance judgements before I can tune, so that is what I am doing next. I may need to extract some additional data as well to decide relevance (user p)
 
 After that, I will add additional settings/tuning for Solr and the queries I make from the User Interface.
 
