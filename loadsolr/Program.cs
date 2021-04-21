@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using CommonServiceLocator;
 using Newtonsoft.Json;
@@ -16,9 +17,11 @@ namespace loadsolr
             var i = 1;
             for (int year = 2010; year < 2021; year++)
             {
+                var propertyList = new List<Property> ();
                 FileStream fileStream = new FileStream($"data\\properties_{year}.json", FileMode.Open);
                 using (StreamReader reader = new StreamReader(fileStream))
                 {
+
                     string line = reader.ReadLine();
                     while (line != null)
                     {
@@ -33,8 +36,7 @@ namespace loadsolr
                             if(!String.IsNullOrWhiteSpace(property.Title)&&!String.IsNullOrWhiteSpace(property.Comments)){
                                 property.Id = i.ToString();
                                 i++;
-                                solr.Add(property);
-                                solr.Commit();
+                                propertyList.Add(property);
                             }
                         }
                         catch (Exception e)
@@ -43,10 +45,21 @@ namespace loadsolr
                         }
                         finally
                         {
+                            if(propertyList.Count == 500){
+                                solr.AddRange(propertyList);
+                                solr.Commit();
+                                propertyList.Clear();
+                                Console.WriteLine("writing a batch of 500 properties");
+                            }
                             line = reader.ReadLine();
                         }
-
+                        
                     }
+                }
+                if(propertyList.Count>0){
+                    solr.AddRange(propertyList);
+                    solr.Commit();
+                    propertyList.Clear();
                 }
             }
         }
