@@ -30,6 +30,10 @@ To create an MVP product, I needed a user interface. For this, I started with an
 
 I had to integrate the user interface with Solr, so I added the necessary package. Then I added a simple call to query Solr on the Title and Comments of a Property.
 
+I also added a simple script in .NET to load the documents I have scraped into Solr.
+
+To create queries, I have to assume the role of the user of this search engine. For this I have decided to be an outdoors-loving person looking for different properties to fulfill their need for outdoor activities.
+
 Next Steps:
 
 Realized I need to create some queries and relevance judgements before I can tune, so that is what I am doing next. I may need to extract some additional data as well to decide relevance (user p)
