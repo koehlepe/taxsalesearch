@@ -33,16 +33,10 @@ namespace SearchTaxSales.Pages
         public void OnGet()
         {
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<Property>>();
-            var words = Search.Split(" ");
             
             AbstractSolrQuery query = new SolrQuery(Search);
 
-            foreach(var word in words){
-                query = query + new SolrQueryByField("title",word);
-                query = query + new SolrQueryByField("comments",word);
-            }
-
-            var results = solr.Query(query, new QueryOptions
+            var results = solr.Query(new LocalParams {{"type", "dismax"},{"qf", "title comments"}} +query, new QueryOptions
             {
                 StartOrCursor = new StartOrCursor.Start(0),
                 Rows = 10
