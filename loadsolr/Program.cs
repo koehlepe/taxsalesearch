@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CommonServiceLocator;
 using Newtonsoft.Json;
 using SolrNet;
@@ -14,7 +15,6 @@ namespace loadsolr
         {
             SolrNet.Startup.Init<Property>("http://localhost:8983/solr/taxsaleinfo");
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<Property>>();
-            var i = 1;
             for (int year = 2010; year < 2021; year++)
             {
                 var propertyList = new List<Property> ();
@@ -34,8 +34,8 @@ namespace loadsolr
                             
                             Property property = JsonConvert.DeserializeObject<Property>(line);
                             if(!String.IsNullOrWhiteSpace(property.Title)&&!String.IsNullOrWhiteSpace(property.Comments)){
-                                property.Id = i.ToString();
-                                i++;
+                                //Make Id Static, instead of auto-incrementing
+                                property.Id = property.Link.Split('/').Last();
                                 propertyList.Add(property);
                             }
                         }
