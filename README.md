@@ -34,10 +34,10 @@ I also added a simple script in .NET to load the documents I have scraped into S
 
 To create queries, I have to assume the role of the user of this search engine. For this I have decided to be an outdoors-loving person looking for different properties to fulfill their need for outdoor activities.
 
+Using the queries I created, I got the top 20 results for all the queries and decided relevance for them to me as the user. Then, I added boosts to the `title` and `comment` fields in my query. I gathered results for several different values of boosts. Finally, I decided relevance for any new documents introduced in the top 20 from in the resulting queries.
+
 Next Steps:
 
-Realized I need to create some queries and relevance judgements before I can tune, so that is what I am doing next. I may need to extract some additional data as well to decide relevance (user p)
+I'll analyze the results of the queries/relevance judgements to decide what to use as boosts in my query for my production application.
 
-After that, I will add additional settings/tuning for Solr and the queries I make from the User Interface.
-
-Maybe I'll get to look at LTR as well.
+I'll deploy my application to production and present on it in CSC 7991.
