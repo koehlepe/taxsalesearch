@@ -1,1 +1,20 @@
-1;great fishing spot
+1;fishing spot
+2;hunting camp
+3;swamp frog
+4;hiking trail
+5;great outdoors
+6;lake house
+7;swimming lake
+8;tubing river
+9;snowmobile sledding
+10;skiing snowboarding
+11;deer hunting
+12;boating kayaking canoeing
+13;peaceful calm
+14;quiet neighbors
+15;retirement community
+16;grassy field
+17;woods forest trees
+18;off the grid secluded
+19;dirt road
+20;camping site
