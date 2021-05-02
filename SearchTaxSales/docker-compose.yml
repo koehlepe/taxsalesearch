@@ -3,9 +3,16 @@ services:
   web:
     build: .
     ports:
-        - "8000:80"
+        - "80:80"
+        - "443:443"
+    environment:       
+        - ASPNETCORE_URLS=https://+:443;http://+:80
+        - ASPNETCORE_Kestrel__Certificates__Default__Password=mypassword123
+        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     depends_on:
         - solr
+    volumes: 
+        - ..\https:/https/
   solr:
     image: solr:8
     ports:
