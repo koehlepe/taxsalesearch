@@ -36,7 +36,7 @@ namespace SearchTaxSales.Pages
             
             AbstractSolrQuery query = new SolrQuery(Search);
 
-            var results = solr.Query(new LocalParams {{"type", "dismax"},{"qf", "title comments"}} +query, new QueryOptions
+            var results = solr.Query(new LocalParams {{"type", "dismax"},{"qf", "title^3 comments^1"}} +query, new QueryOptions
             {
                 StartOrCursor = new StartOrCursor.Start(0),
                 Rows = 10
