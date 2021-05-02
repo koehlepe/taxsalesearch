@@ -34,10 +34,11 @@ I also added a simple script in .NET to load the documents I have scraped into S
 
 To create queries, I have to assume the role of the user of this search engine. For this I have decided to be an outdoors-loving person looking for different properties to fulfill their need for outdoor activities.
 
-Using the queries I created, I got the top 20 results for all the queries and decided relevance for them to me as the user. Then, I added boosts to the `title` and `comment` fields in my query. I gathered results for several different values of boosts. Finally, I decided relevance for any new documents introduced in the top 20 from in the resulting queries.
+Using the queries I created, I got the top 20 results for all the queries and decided relevance for them to me as the user. Then, I added boosts to the `title` and `comments` fields in my query. I gathered results for several different values of boosts. Finally, I decided relevance for any new documents introduced in the top 20 from in the resulting queries.
 
-Next Steps:
+I analyzed the results and found that attaching a boost of 3 to `title` and a boost of 1 to `comments` gave the best MAP results of the settings I tested. 
 
-I'll analyze the results of the queries/relevance judgements to decide what to use as boosts in my query for my production application.
+![MAP plot](plots/MAPWithFieldWeights.png)
 
-I'll deploy my application to production and present on it in CSC 7991.
+
+I've deployed my production application to [www.searchtaxsales.com](https://www.searchtaxsales.com).
